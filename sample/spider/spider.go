@@ -4,7 +4,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/shiyanhui/dht"
+	"dht"
 	"net/http"
 	_ "net/http/pprof"
 )
@@ -26,7 +26,7 @@ func main() {
 		http.ListenAndServe(":6060", nil)
 	}()
 
-	w := dht.NewWire(65536, 1024, 256)
+	w := dht.NewWire(4096, 256, 8)
 	go func() {
 		for resp := range w.Response() {
 			metadata, err := dht.Decode(resp.MetadataInfo)
