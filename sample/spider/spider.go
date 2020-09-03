@@ -26,7 +26,7 @@ func main() {
 		http.ListenAndServe(":6060", nil)
 	}()
 
-	w := dht.NewWire(4096, 256, 8)
+	w := dht.NewWire(40960/2, 512, 16)
 	go func() {
 		for resp := range w.Response() {
 			metadata, err := dht.Decode(resp.MetadataInfo)
